@@ -1177,7 +1177,7 @@ footer { border-top:1px solid hsl(var(--border)); padding:38px 0; }
         <div class="offer-price">
           <div class="price-value"><span class="price-cur" style="font-size:22px; font-weight:800; color:hsl(var(--foreground));">12x de R$</span><span class="price-num">41,06</span></div>
           <p class="price-inst">ou <b>R$ 397 à vista</b></p>
-          <a class="btn btn-blue btn-xl" href="https://pay.kiwify.com.br/JJGHe7G/?utm_source=lp_brabo_space" target="_blank" rel="noopener noreferrer">Quero me tornar o Diretor Brabo →</a>
+          <a class="btn btn-blue btn-xl js-kiwify-link" href="https://pay.kiwify.com.br/JJGHe7G/" target="_blank" rel="noopener noreferrer">Quero me tornar o Diretor Brabo →</a>
           <p class="btn-note">7 dias de garantia incondicional · acesso imediato</p>
         </div>
       </div>
@@ -1397,6 +1397,18 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
     }
     daysEl.appendChild(cell);
   }
+})();
+
+/* Propaga utm_source da LP para o link de compra da Kiwify (default = orgânico) */
+(function () {
+  const DEFAULT_UTM_SOURCE = 'lp-brabo-space';
+  const utmSource = new URLSearchParams(window.location.search).get('utm_source') || DEFAULT_UTM_SOURCE;
+
+  document.querySelectorAll('.js-kiwify-link').forEach((link) => {
+    const url = new URL(link.href);
+    url.searchParams.set('utm_source', utmSource);
+    link.href = url.toString();
+  });
 })();
 </script>
 
