@@ -1399,14 +1399,16 @@ document.querySelectorAll('.rv').forEach(el => io.observe(el));
   }
 })();
 
-/* Propaga utm_source da LP para o link de compra da Kiwify (default = orgânico) */
+/* Propaga utm_source da LP para o link de compra da Kiwify (default = orgânico) e define utm_campaign fixo */
 (function () {
   const DEFAULT_UTM_SOURCE = 'lp-brabo-space';
+  const UTM_CAMPAIGN = 'condicao-especial';
   const utmSource = new URLSearchParams(window.location.search).get('utm_source') || DEFAULT_UTM_SOURCE;
 
   document.querySelectorAll('.js-kiwify-link').forEach((link) => {
     const url = new URL(link.href);
     url.searchParams.set('utm_source', utmSource);
+    url.searchParams.set('utm_campaign', UTM_CAMPAIGN);
     link.href = url.toString();
   });
 })();
